@@ -20,36 +20,20 @@ export default function SignUpPage() {
     const userData = Object.fromEntries(formData.entries());
     console.log( "User Data:", userData);
 
-    const {data, error} = await authClient.signUp.email({
-      name: userData.name,
+    const {data, error} = await authClient.signIn.email({
       email: userData.email,
       password: userData.password,
-      image: userData.image,
-
+      callbackURL: "/",
     })
-    console.log( "Sign Up Data:", data, "Error:", error);
-    if(data){
-      redirect("/");
-    }
-
+    console.log( "Sign In Data:", data, "Error:", error);
+    
   };
 
   return (
     <Card className="border mx-auto w-125 py-10 mt-5">
-      <h1 className="text-center text-2xl font-bold">Sign Up</h1>
+      <h1 className="text-center text-2xl font-bold">Sign In</h1>
 
       <Form className="flex w-96 mx-auto flex-col gap-4" onSubmit={onSubmit}>
-        <TextField isRequired name="name" type="text">
-          <Label>Name</Label>
-          <Input placeholder="Enter your name" />
-          <FieldError />
-        </TextField>
-
-        <TextField isRequired name="image" type="text">
-          <Label>Image URL</Label>
-          <Input placeholder="Image URL" />
-          <FieldError />
-        </TextField>
 
         <TextField
           isRequired
